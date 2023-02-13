@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EAEAEA"
-    android:backgroundTint="#E3E3E3"
-    tools:context=".MainActivity">
+    android:background="@drawable/poster_3"
+    tools:context=".HomeActivity">
 
     <Button
         android:id="@+id/entrees"
-        android:layout_width="181dp"
-        android:layout_height="73dp"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/amarante"
         android:text="@string/entrees"
         android:textColor="#040404"
         android:textSize="34sp"
+        app:cornerRadius="16dp"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/plats"
         app:layout_constraintEnd_toEndOf="@+id/plats"
@@ -25,76 +25,93 @@
 
     <Button
         android:id="@+id/plats"
-        android:layout_width="181dp"
-        android:layout_height="73dp"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
         android:backgroundTint="#FFFFFF"
         android:ellipsize="none"
         android:fontFamily="@font/amarante"
+        android:shadowDx="20"
         android:text="@string/plats"
         android:textColor="#000000"
         android:textSize="34sp"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <Button
         android:id="@+id/desserts"
-        android:layout_width="181dp"
-        android:layout_height="73dp"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/amarante"
+        android:shadowColor="#FEFEFE"
         android:text="@string/desserts"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="34sp"
+        app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="@+id/plats"
         app:layout_constraintStart_toStartOf="@+id/plats"
         app:layout_constraintTop_toBottomOf="@+id/plats" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginBottom="350dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.302"
-        app:srcCompat="@drawable/isen" />
 
     <TextView
         android:id="@+id/titre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/amarante"
+        android:shadowColor="#FFFFFF"
+        android:shadowRadius="50"
         android:text="@string/bienvenue"
-        android:textColor="#FF4D4D"
-        android:textSize="34sp"
+        android:textColor="#FFFFFF"
+        android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.415" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="178dp"
+        android:layout_height="171dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095" />
 
     <TextView
-        android:id="@+id/nom"
+        android:id="@+id/titre2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/amarante"
-        android:text="@string/nom"
-        android:textColor="#FF4D4D"
-        android:textSize="34sp"
+        android:shadowColor="#FFFFFF"
+        android:shadowRadius="50"
+        android:text="@string/petit"
+        android:textColor="#FFFFFF"
+        android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintTop_toBottomOf="@+id/titre"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <TextView
+        android:id="@+id/textLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amarante"
+        android:text="@string/petit"
+        android:textColor="#FE4D4D"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/logo"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

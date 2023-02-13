@@ -13,7 +13,11 @@
     <string name="entrees">Entrées</string>
     <string name="plats">Plats</string>
     <string name="desserts">Desserts</string>
-    <string name="bienvenue">Bienvenue sur</string>
-    <string name="nom">Petit chef</string>
+    <string name="bienvenue">BIENVENUE sur le site de</string>
+    <string name="petit">Petit Chef</string>
 
+    <string name="liste">Liste des ingrédients : </string>
+    <string name="total">Ajouter au panier: 0 €</string>
+    <string name="plus">+</string>
+    <string name="moins">-</string>
 </resources>
