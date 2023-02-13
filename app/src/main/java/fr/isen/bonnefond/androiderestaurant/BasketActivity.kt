@@ -6,10 +6,6 @@ import fr.isen.bonnefond.androiderestaurant.databinding.ActivityBasketBinding
 
 class BasketActivity : AppCompatActivity() {
 
-    companion object {
-        val extraKeyBasket = "extraKeyBasket"
-    }
-
     lateinit var binding: ActivityBasketBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

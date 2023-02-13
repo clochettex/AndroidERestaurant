@@ -66,7 +66,7 @@ class DetailActivity : AppCompatActivity() {
             val newPrice = convertString(price)
 
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
-            binding.buttonAddToBasket.text = ("Total: $tot €").toString()
+            binding.buttonAddToBasket.text = ("Ajouter au panier: $tot €").toString()
             }
         }
 
@@ -88,7 +88,6 @@ class DetailActivity : AppCompatActivity() {
             val newPrice = convertString(price)
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
             val intent = Intent(this, BasketActivity::class.java)
-            intent.putExtra(BasketActivity.extraKeyBasket, tot.toString())
             startActivity(intent)
 
         }
