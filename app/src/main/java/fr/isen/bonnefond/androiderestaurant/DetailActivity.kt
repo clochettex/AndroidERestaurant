@@ -12,6 +12,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import fr.isen.bonnefond.androiderestaurant.databinding.ActivityDetailBinding
 import fr.isen.bonnefond.androiderestaurant.network.Plate
+import org.json.JSONArray
+import org.json.JSONObject
+
 class DetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetailBinding
@@ -74,20 +77,41 @@ class DetailActivity : AppCompatActivity() {
 
             val newPrice = convertString(price)
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
-            val basketFile = mapOf("Total du panier : " to tot.toString() + "€")
-            val basketJson = Gson().toJson(basketFile)
-            val fileOutputStream = openFileOutput("basket.json", Context.MODE_PRIVATE)
-            fileOutputStream.write(basketJson.toByteArray())
-            fileOutputStream.close()
-            val view = findViewById<View>(android.R.id.content)
-            Snackbar.make(view, "Vous avez ajouté " + (tot.toString()) + "€ au panier", Snackbar.LENGTH_SHORT)
-            .show()
+            if (count != 0) {
+                val basketFile = mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
+                val basketJson = Gson().toJson(basketFile)
+                val fileOutputStream = openFileOutput("basket.json", Context.MODE_APPEND)
+                fileOutputStream.write(basketJson.toByteArray())
+                fileOutputStream.close()
+                val view = findViewById<View>(android.R.id.content)
+                Snackbar.make(view, "Vous avez ajouté " + (tot.toString()) + "€ au panier", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
         }
 
         imageViewBasket.setOnClickListener {
             val newPrice = convertString(price)
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
+            val basketFile = mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
+            val basketJson = Gson().toJson(basketFile)
             val intent = Intent(this, BasketActivity::class.java)
+            intent.putExtra("basketJson", basketJson)
+
+            val sharedPreferences = getSharedPreferences("MonApplicationPreferences", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            val basketListString = sharedPreferences.getString("basketList", "[]")
+            val basketList = JSONArray(basketListString)
+
+            val newBasketItem = JSONObject()
+            newBasketItem.put("countValue", count)
+            newBasketItem.put("nameValue", plate?.name)
+            newBasketItem.put("totValue", tot.toString())
+            basketList.put(newBasketItem)
+
+            editor.putString("basketList", basketList.toString())
+            editor.apply()
+
             startActivity(intent)
 
         }

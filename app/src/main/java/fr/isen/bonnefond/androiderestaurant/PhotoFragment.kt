@@ -16,6 +16,7 @@ class PhotoFragment : Fragment() {
     companion object {
         val ARG_PARAM1 = "ARG_PARAM1"
 
+
         fun newInstance(image: String) =
             PhotoFragment().apply {
                 arguments = Bundle().apply {
@@ -31,12 +32,12 @@ class PhotoFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPhotoBinding.inflate(inflater, container, false)
-        Picasso.get().load(image).into(binding.imageView)
+        if(image?.isNotEmpty() == true) {
+        Picasso.get().load(image).into(binding.imageView)}
         return binding.root
+
     }
+
 }
