@@ -20,7 +20,6 @@
     <string name="total">Ajouter au panier: 0 €</string>
     <string name="plus">+</string>
     <string name="moins">-</string>
-    <string name="attention">ATTENTION ! Merci d\'aller sur votre panier à chaque fois que vous appuyer sur "ajouter"</string>
 
     <string name="panier">Voici votre panier :</string>
     <string name="listePanier">Votre panier est vide.. T_T</string>

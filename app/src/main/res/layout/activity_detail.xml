@@ -157,18 +157,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="377dp"
-        android:layout_height="70dp"
-        android:fontFamily="@font/autour_one"
-        android:text="@string/attention"
-        android:textColor="#03A9F4"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonPlus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager2"
-        app:layout_constraintVertical_bias="0.959" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

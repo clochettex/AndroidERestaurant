@@ -77,25 +77,17 @@ class DetailActivity : AppCompatActivity() {
 
             val newPrice = convertString(price)
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
-            if (count != 0) {
-                val basketFile = mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
+            if(count !=0) {
+                val basketFile =
+                    mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
                 val basketJson = Gson().toJson(basketFile)
                 val fileOutputStream = openFileOutput("basket.json", Context.MODE_APPEND)
                 fileOutputStream.write(basketJson.toByteArray())
                 fileOutputStream.close()
-                val view = findViewById<View>(android.R.id.content)
-                Snackbar.make(view, "Vous avez ajouté " + (tot.toString()) + "€ au panier", Snackbar.LENGTH_SHORT)
-                    .show()
             }
-        }
-
-        imageViewBasket.setOnClickListener {
-            val newPrice = convertString(price)
-            val tot = newPrice?.let { it1 -> multiply(it1,count) }
-            val basketFile = mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
-            val basketJson = Gson().toJson(basketFile)
-            val intent = Intent(this, BasketActivity::class.java)
-            intent.putExtra("basketJson", basketJson)
+            val view = findViewById<View>(android.R.id.content)
+            Snackbar.make(view, "Vous avez ajouté " + (tot.toString()) + "€ au panier", Snackbar.LENGTH_SHORT)
+                .show()
 
             val sharedPreferences = getSharedPreferences("MonApplicationPreferences", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -111,7 +103,16 @@ class DetailActivity : AppCompatActivity() {
 
             editor.putString("basketList", basketList.toString())
             editor.apply()
+        }
 
+        imageViewBasket.setOnClickListener {
+            val newPrice = convertString(price)
+            val tot = newPrice?.let { it1 -> multiply(it1,count) }
+            val basketFile = mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
+            val basketJson = Gson().toJson(basketFile)
+            val intent = Intent(this, BasketActivity::class.java)
+
+            intent.putExtra("basketJson", basketJson)
             startActivity(intent)
 
         }
