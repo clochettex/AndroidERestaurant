@@ -3,7 +3,6 @@ package fr.isen.bonnefond.androiderestaurant
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import fr.isen.bonnefond.androiderestaurant.network.Plate
 
 class PhotoAdapter(val images: List<String>, activity: AppCompatActivity): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
