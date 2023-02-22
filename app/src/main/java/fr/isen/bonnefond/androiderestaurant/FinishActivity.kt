@@ -4,16 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import fr.isen.bonnefond.androiderestaurant.databinding.ActivityFinishBinding
 
 class FinishActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityFinishBinding
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finish)
-        val buttonRetour = findViewById<Button>(R.id.buttonRetour)
+        binding = ActivityFinishBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        buttonRetour.setOnClickListener {
+        binding.buttonRetour.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }

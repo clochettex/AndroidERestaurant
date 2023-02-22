@@ -24,6 +24,7 @@
     <string name="panier">Voici votre panier :</string>
     <string name="listePanier">Votre panier est vide.. T_T</string>
     <string name="commander">commander !</string>
+    <string name="supprimer">supprimer votre panier</string>
 
     <string name="merci">Merci ! Votre commander à bien été pris en compte. Notre livreur est en chemin.</string>
     <string name="retour">Retour menu principal</string>

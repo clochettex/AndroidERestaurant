@@ -1,5 +1,6 @@
 package fr.isen.bonnefond.androiderestaurant
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class CustomAdapter(val items: List<Plate>, val clickListener: (Plate) -> Unit):
         return items.count()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CellViewHolder, position: Int) {
         val plate = items[position]
         holder.textView.text = plate.name

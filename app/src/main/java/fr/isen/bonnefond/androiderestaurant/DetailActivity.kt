@@ -1,13 +1,11 @@
 package fr.isen.bonnefond.androiderestaurant
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import fr.isen.bonnefond.androiderestaurant.databinding.ActivityDetailBinding
@@ -24,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
         val extraKeyDetail = "extraKeyDetail"
     }
 
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -44,68 +42,61 @@ class DetailActivity : AppCompatActivity() {
             binding.viewPager2.adapter = PhotoAdapter(it.images, this)
         }
 
-        val textViewQuantity = findViewById<TextView>(R.id.textViewQuantity)
-        val buttonPlus = findViewById<Button>(R.id.buttonPlus)
-        val buttonMinus = findViewById<Button>(R.id.buttonMinus)
-        val buttonTotal = findViewById<Button>(R.id.buttonAddToBasket)
-        val imageViewBasket = findViewById<ImageView>(R.id.imageViewBasket)
-
-        buttonPlus.setOnClickListener {
+        binding.buttonPlus.setOnClickListener {
             count++
-            textViewQuantity.text = count.toString()
-
+            binding.textViewQuantity.text = count.toString()
             val newPrice = convertString(price)
-
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
             binding.buttonAddToBasket.text = ("Ajouter au panier: $tot €").toString()
-
         }
 
-        buttonMinus.setOnClickListener {
+        binding.buttonMinus.setOnClickListener {
             if (count > 0) {
             count--
-            textViewQuantity.text = count.toString()
-
+            binding.textViewQuantity.text = count.toString()
             val newPrice = convertString(price)
-
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
             binding.buttonAddToBasket.text = ("Ajouter au panier: $tot €").toString()
             }
         }
 
-        buttonTotal.setOnClickListener {
+        binding.buttonAddToBasket.setOnClickListener {
+                val newPrice = convertString(price)
+                val tot = newPrice?.let { it1 -> multiply(it1, count) }
+                if (count != 0) {
+                    val basketFile =
+                        mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
+                    val basketJson = Gson().toJson(basketFile)
+                    val fileOutputStream = openFileOutput("basket.json", Context.MODE_APPEND)
+                    fileOutputStream.write(basketJson.toByteArray())
+                    fileOutputStream.close()
 
-            val newPrice = convertString(price)
-            val tot = newPrice?.let { it1 -> multiply(it1,count) }
-            if(count !=0) {
-                val basketFile =
-                    mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
-                val basketJson = Gson().toJson(basketFile)
-                val fileOutputStream = openFileOutput("basket.json", Context.MODE_APPEND)
-                fileOutputStream.write(basketJson.toByteArray())
-                fileOutputStream.close()
-            }
-            val view = findViewById<View>(android.R.id.content)
-            Snackbar.make(view, "Vous avez ajouté " + (tot.toString()) + "€ au panier", Snackbar.LENGTH_SHORT)
-                .show()
+                    val view = findViewById<View>(android.R.id.content)
+                    Snackbar.make(
+                        view,
+                        "Vous avez ajouté " + (tot.toString()) + "€ au panier",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .show()
+                }
+                val sharedPreferences =
+                    getSharedPreferences("MonApplicationPreferences", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
 
-            val sharedPreferences = getSharedPreferences("MonApplicationPreferences", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
+                val basketListString = sharedPreferences.getString("basketList", "[]")
+                val basketList = JSONArray(basketListString)
 
-            val basketListString = sharedPreferences.getString("basketList", "[]")
-            val basketList = JSONArray(basketListString)
+                val newBasketItem = JSONObject()
+                newBasketItem.put("countValue", count)
+                newBasketItem.put("nameValue", plate?.name)
+                newBasketItem.put("totValue", tot.toString())
+                basketList.put(newBasketItem)
 
-            val newBasketItem = JSONObject()
-            newBasketItem.put("countValue", count)
-            newBasketItem.put("nameValue", plate?.name)
-            newBasketItem.put("totValue", tot.toString())
-            basketList.put(newBasketItem)
-
-            editor.putString("basketList", basketList.toString())
-            editor.apply()
+                editor.putString("basketList", basketList.toString())
+                editor.apply()
         }
 
-        imageViewBasket.setOnClickListener {
+        binding.imageViewBasket.setOnClickListener {
             val newPrice = convertString(price)
             val tot = newPrice?.let { it1 -> multiply(it1,count) }
             val basketFile = mapOf("Nouvel ajout " to count.toString() + " " + plate?.name.toString() + " pour " + tot.toString() + "€")
@@ -139,7 +130,4 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
-
 }
-
-

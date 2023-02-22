@@ -66,7 +66,7 @@
         android:shadowRadius="50"
         android:text="@string/bienvenue"
         android:textColor="#FFFFFF"
-        android:textSize="38sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
